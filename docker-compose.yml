@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  mail:
+    build: .
+    volumes:
+      - ./dovecot_conf/10-auth.conf:/etc/dovecot/conf.d/10-auth.conf
+      - ./dovecot_conf/10-mail.conf:/etc/dovecot/conf.d/10-mail.conf
+      - ./dovecot_conf/10-ssl.conf:/etc/dovecot/conf.d/10-ssl.conf
+      - ./dovecot_conf/10-logging.conf:/etc/dovecot/conf.d/10-logging.conf
+    ports:
+      - 143:143
+      - 993:993
+    environment:
+      USER: ${MAIL_USER-shogoki}
+      PASSWORD: ${MAIL_PW-$$2y$$05$$.0thfNaTCo8tQ96UzF1Yj.13jA6CAKDKKbSzypn6xK0g2wPGckXHO}
